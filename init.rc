@@ -835,7 +835,7 @@ service playsound /system/bin/playsound
     oneshot
 
 # Custom script
-service userscript /sbin/userscript.sh
+service sysinit /system/bin/logwrapper /sbin/busybox run-parts /system/etc/init.d
     user root
     critical
     oneshot
