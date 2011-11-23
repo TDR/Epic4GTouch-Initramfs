@@ -8,7 +8,8 @@ on init
     export ANDROID_DATA /data
     export EXTERNAL_STORAGE /sdcard
 
-    mkdir /etc
+    #mkdir /etc
+	symlink /misc /etc
     mkdir /sdcard
     mkdir /preload
     mkdir /system
