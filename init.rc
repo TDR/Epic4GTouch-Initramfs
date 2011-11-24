@@ -831,10 +831,17 @@ service playsound /system/bin/playsound
     disabled
     oneshot
 
-service samsungani /system/bin/samsungani
+# Init.d
+service sysinit /system/bin/logwrapper /sbin/busybox run-parts /system/etc/init.d
+    user root
+    critical
+    oneshot
+
+# Custom bootanimation
+service bootanim /system/bin/bootanimation
     user graphics
     group graphics
-    disabled
+    critical
     oneshot
 
 service wpa_supplicant /system/bin/wpa_supplicant -Dwext -ieth0 -c/data/wifi/bcm_supp.conf
@@ -1078,4 +1085,5 @@ service wimax_renew /system/bin/dhcpcd -n uwbr0
         disabled
         oneshot
 
-
+on property:sys.boot_completed=1
+    stop bootanim
