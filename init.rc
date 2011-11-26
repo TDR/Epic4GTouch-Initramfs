@@ -45,10 +45,10 @@ loglevel 3
     mkdir /acct/uid
 
 #add booting sound property 
-	setprop audioflinger.bootsnd 1
+    setprop audioflinger.bootsnd 1
 
 #add camera sound property for NA_SPR
-	setprop ro.camera.sound.forced 1
+    setprop ro.camera.sound.forced 1
 
 # Backwards Compat - XXX: Going away in G*
     symlink /mnt/sdcard /sdcard
@@ -155,7 +155,7 @@ on fs
 
 on post-fs
     # verfiy filesystem (UMS)
-	exec apply_system_policy /dev/block/mmcblk0p11 vfat
+    exec apply_system_policy /dev/block/mmcblk0p11 vfat
     
     # once everything is setup, no need to modify /
     # mount rootfs rootfs / ro remount
@@ -354,19 +354,19 @@ on post-fs
     chmod 0775 /efs/.files/.dm33
     chmod 0775 /efs/.files/.mp301
 
-	# Added for Playready DRM Support
+    # Added for Playready DRM Support
 #mkdir /data/data/.drm 0755
     mkdir /data/data/.drm 0775
-	chown media system /data/data/.drm
+    chown media system /data/data/.drm
     chmod 0775 /data/data/.drm
-	mkdir /data/data/.drm/.playready 0775
-	chown media system /data/data/.drm/.playready
+    mkdir /data/data/.drm/.playready 0775
+    chown media system /data/data/.drm/.playready
     chmod 0775 /data/data/.drm/.playready
 #SISO-PLAYREADY-CHANGES
 
 # Added by Yamaha Corporation. -----------------------------------------
 # setup for alsa snd device
-	symlink /dev/snd/pcmC0D0c /dev/pcmC0D0c
+    symlink /dev/snd/pcmC0D0c /dev/pcmC0D0c
     symlink /dev/snd/pcmC0D0p /dev/pcmC0D0p
     symlink /dev/snd/controlC0 /dev/controlC0
     symlink /dev/snd/timer /dev/timer
@@ -455,8 +455,8 @@ on boot
     chmod 660 /dev/swmxctl
     chmod 660 /dev/uwibro
     chown system system /dev/swmxctl
-    chown system system /dev/uwibro	
-	
+    chown system system /dev/uwibro
+
 # Permissions for gpio_keys
     chown radio system /sys/devices/platform/sec_key.0/disabled_keys
     write /sys/devices/platform/sec_key.0/disabled_keys 114,115
@@ -467,99 +467,99 @@ on boot
 
 
 
-	chown radio system /sys/devices/virtual/K3G_GYRO-dev/k3g/gyro_selftest
-	chown radio system /sys/devices/virtual/K3G_GYRO-dev/k3g/gyro_get_temp 
-	chown radio system /sys/devices/virtual/K3G_GYRO-dev/k3g/gyro_power_on 
-	chown radio system /sys/devices/virtual/K3G_GYRO-dev/k3g/gyro_selftest_dps
-	chown radio system /sys/devices/virtual/accelerometer/accelerometer/acc_file 
-	chown radio system /sys/devices/virtual/misc/melfas_touchkey/touch_sensitivity
-	chown radio system /sys/devices/virtual/sec/gsensorcal/calibration
-	chown radio system /sys/devices/virtual/jack/jack_selector/select_jack 
-	chown radio system /sys/devices/platform/samsung-pd.2/s3cfb.0/spi_gpio.3/spi3.0/lcd_power 
-	chown radio system /sys/devices/platform/samsung-pd.2/s3cfb.0/spi_gpio.3/spi3.0/octa_lcdtype 
-	chown radio system /sys/devices/platform/samsung-pd.2/s3cfb.0/spi_gpio.3/spi3.0/lcdtype 
-	chown radio radio /sys/devices/platform/samsung-pd.2/s3cfb.0/spi_gpio.3/spi3.0/acl_set 
-	chown radio radio /sys/devices/platform/samsung-pd.2/s3cfb.0/spi_gpio.3/spi3.0/gamma_table 
-	chown radio radio /sys/devices/platform/samsung-pd.2/s3cfb.0/spi_gpio.3/spi3.0/gamma_mode 
-	chown radio system /sys/devices/virtual/mdnieset_outdoor/switch_mdnieset_outdoor/mdnieset_outdoor_file_cmd
-	chown radio system /sys/devices/virtual/mdnieset_ui/switch_mdnieset_ui/mdnieset_init_file_cmd
-	chown radio system /sys/devices/virtual/mdnieset_ui/switch_mdnieset_ui/mdnieset_user_select_file_cmd
-	chown radio system /sys/devices/virtual/mdnieset_ui/switch_mdnieset_ui/mdnieset_ui_file_cmd
-	chown radio system /sys/devices/virtual/misc/melfas_touchkey/enable_disable 
-	chown radio system /sys/devices/virtual/misc/melfas_touchkey/brightness
-	chown radio system /sys/devices/virtual/misc/melfas_touchkey/touch_update
-	chown radio system /sys/devices/virtual/misc/melfas_touchkey/touch_version
-	chown radio system /sys/devices/virtual/misc/melfas_touchkey/autocal_enable
-	chown radio system /sys/devices/virtual/misc/melfas_touchkey/autocal_stat
-	chown radio system /sys/devices/virtual/misc/melfas_touchkey/touchkey_idac0
-	chown radio system /sys/devices/virtual/misc/melfas_touchkey/touchkey_idac1
-	chown radio system /sys/devices/virtual/misc/melfas_touchkey/touchkey_idac2
-	chown radio system /sys/devices/virtual/misc/melfas_touchkey/touchkey_idac3
-	chown radio system /sys/devices/virtual/sec/sec_touchkey/touchkey_firm_version_panel
-	chown radio system /sys/devices/virtual/sec/sec_touchkey/touchkey_firm_version_phone
-	chown radio system /sys/devices/virtual/sec/sec_touchkey/touchkey_firm_update_status
-	chown radio system /sys/devices/virtual/sec/sec_touchkey/touchkey_firm_update
-	chown radio system /sys/devices/virtual/sec/qt602240_noise_test/set_firm_version
-	chown radio system /sys/devices/virtual/sec/qt602240_noise_test/set_threshould
-	chown radio system /sys/devices/virtual/sec/qt602240_noise_test/set_all_refer
-	chown radio system /sys/devices/virtual/sec/qt602240_noise_test/set_delta4
-	chown radio system /sys/devices/virtual/sec/qt602240_noise_test/set_refer4
-	chown radio system /sys/devices/virtual/sec/qt602240_noise_test/set_delta3
-	chown radio system /sys/devices/virtual/sec/qt602240_noise_test/set_refer3
-	chown radio system /sys/devices/virtual/sec/qt602240_noise_test/set_delta2
-	chown radio system /sys/devices/virtual/sec/qt602240_noise_test/set_refer2
-	chown radio system /sys/devices/virtual/sec/qt602240_noise_test/set_delta1
-	chown radio system /sys/devices/virtual/sec/qt602240_noise_test/set_refer1
-	chown radio system /sys/devices/virtual/sec/qt602240_noise_test/set_delta0
-	chown radio system /sys/devices/virtual/sec/qt602240_noise_test/set_refer0
-	chown radio system /sys/devices/virtual/sec/sec_touchscreen/tsp_firm_version_panel
-	chown radio system /sys/devices/virtual/sec/sec_touchscreen/tsp_firm_version_phone
-	chown radio system /sys/devices/virtual/sec/sec_touchscreen/tsp_firm_update_status 
-	chown radio system /sys/devices/virtual/sec/sec_touchscreen/tsp_firm_update 
-	chown radio system /sys/devices/platform/s5p-ehci/ehci_runtime
-	chown radio system /sys/devices/platform/modemctl/wakeup
-	chown radio system /sys/devices/platform/modemctl/control
-	chown radio system /sys/devices/platform/android_usb/tethering
-	chown radio system /sys/devices/platform/android_usb/UsbMenuSel
-	chown radio system /sys/devices/virtual/sec/switch/disable_vbus
-	chown radio system /sys/devices/virtual/gpio/gpio225/value
-	chown radio system /sys/devices/platform/i2c-gpio.9/i2c-9/9-0036/power_supply/fuelgauge/fg_read_soc
-	chown radio system /sys/devices/platform/i2c-gpio.9/i2c-9/9-0036/power_supply/fuelgauge/fg_reset_soc
-	chown radio system /sys/devices/platform/s3c2410-i2c.5/i2c-5/5-0066/max8997-muic/usb_sel
-	chown radio system /sys/devices/platform/s3c2410-i2c.5/i2c-5/5-0066/max8997-muic/esn
-	chown radio system /sys/devices/platform/sec-battery/power_supply/battery/batt_lpm_state
-	chown radio system /sys/devices/platform/sec-battery/power_supply/battery/fg_psoc
-	chown radio system /sys/devices/platform/sec-battery/power_supply/battery/system_rev
-	chown radio system /sys/devices/platform/sec-battery/power_supply/battery/batt_current_adc
-	chown radio system /sys/devices/platform/sec-battery/power_supply/battery/batt_test_value
-	chown radio system /sys/devices/platform/sec-battery/power_supply/battery/batt_temp_adc_spec
-	chown radio system /sys/devices/platform/sec-battery/power_supply/battery/batt_temp_check
-	chown radio system /sys/devices/platform/sec-battery/power_supply/battery/batt_full_check
-	chown radio system /sys/devices/platform/sec-battery/power_supply/battery/batt_type
-	chown radio system /sys/devices/platform/sec-battery/power_supply/battery/mp3
-	chown radio system /sys/devices/platform/sec-battery/power_supply/battery/video
-	chown radio system /sys/devices/platform/sec-battery/power_supply/battery/batt_lp_charging
-	chown radio system /sys/devices/platform/sec-battery/power_supply/battery/charging_source
-	chown radio system /sys/devices/platform/sec-battery/power_supply/battery/batt_temp_adc_avg
-	chown radio system /sys/devices/platform/sec-battery/power_supply/battery/batt_temp_adc
-	chown radio system /sys/devices/platform/sec-battery/power_supply/battery/batt_temp
-	chown radio system /sys/devices/platform/sec-battery/power_supply/battery/batt_vfocv
-	chown radio system /sys/devices/platform/sec-battery/power_supply/battery/batt_soc
-	chown radio system /sys/devices/platform/sec-battery/power_supply/battery/batt_vol
-	chown radio radio /sys/devices/platform/sec-battery/power_supply/battery/talk_gsm
-	chown radio radio /sys/devices/platform/sec-battery/power_supply/battery/video
-	chown radio radio /sys/devices/platform/sec-battery/power_supply/battery/music
-	chown radio radio /sys/devices/platform/sec-battery/power_supply/battery/browser
-	chown radio radio /sys/devices/platform/sec-battery/power_supply/battery/hotspot
-	chown radio radio /sys/devices/platform/sec-battery/power_supply/battery/camera
-	chown radio radio /sys/devices/platform/sec-battery/power_supply/battery/data_call
-	chown radio radio /sys/devices/platform/sec-battery/power_supply/battery/wimax
-	chown radio radio  /sys/devices/virtual/mdnieset_outdoor/switch_mdnieset_outdoor/mdnieset_outdoor_file_cmd 
-	chown radio radio /sys/devices/virtual/mdnieset_ui/switch_mdnieset_ui/mdnieset_init_file_cmd 
-	chown radio radio /sys/devices/virtual/mdnieset_ui/switch_mdnieset_ui/mdnieset_user_select_file_cmd
-	chown radio radio /sys/devices/virtual/mdnieset_ui/switch_mdnieset_ui/mdnieset_ui_file_cmd 
-	chown radio system /sys/devices/platform/s5p-ehci/ehci_power
-	chown radio system /sys/devices/virtual/net/svnet0/waketime
+    chown radio system /sys/devices/virtual/K3G_GYRO-dev/k3g/gyro_selftest
+    chown radio system /sys/devices/virtual/K3G_GYRO-dev/k3g/gyro_get_temp 
+    chown radio system /sys/devices/virtual/K3G_GYRO-dev/k3g/gyro_power_on 
+    chown radio system /sys/devices/virtual/K3G_GYRO-dev/k3g/gyro_selftest_dps
+    chown radio system /sys/devices/virtual/accelerometer/accelerometer/acc_file 
+    chown radio system /sys/devices/virtual/misc/melfas_touchkey/touch_sensitivity
+    chown radio system /sys/devices/virtual/sec/gsensorcal/calibration
+    chown radio system /sys/devices/virtual/jack/jack_selector/select_jack 
+    chown radio system /sys/devices/platform/samsung-pd.2/s3cfb.0/spi_gpio.3/spi3.0/lcd_power 
+    chown radio system /sys/devices/platform/samsung-pd.2/s3cfb.0/spi_gpio.3/spi3.0/octa_lcdtype 
+    chown radio system /sys/devices/platform/samsung-pd.2/s3cfb.0/spi_gpio.3/spi3.0/lcdtype 
+    chown radio radio /sys/devices/platform/samsung-pd.2/s3cfb.0/spi_gpio.3/spi3.0/acl_set 
+    chown radio radio /sys/devices/platform/samsung-pd.2/s3cfb.0/spi_gpio.3/spi3.0/gamma_table 
+    chown radio radio /sys/devices/platform/samsung-pd.2/s3cfb.0/spi_gpio.3/spi3.0/gamma_mode 
+    chown radio system /sys/devices/virtual/mdnieset_outdoor/switch_mdnieset_outdoor/mdnieset_outdoor_file_cmd
+    chown radio system /sys/devices/virtual/mdnieset_ui/switch_mdnieset_ui/mdnieset_init_file_cmd
+    chown radio system /sys/devices/virtual/mdnieset_ui/switch_mdnieset_ui/mdnieset_user_select_file_cmd
+    chown radio system /sys/devices/virtual/mdnieset_ui/switch_mdnieset_ui/mdnieset_ui_file_cmd
+    chown radio system /sys/devices/virtual/misc/melfas_touchkey/enable_disable 
+    chown radio system /sys/devices/virtual/misc/melfas_touchkey/brightness
+    chown radio system /sys/devices/virtual/misc/melfas_touchkey/touch_update
+    chown radio system /sys/devices/virtual/misc/melfas_touchkey/touch_version
+    chown radio system /sys/devices/virtual/misc/melfas_touchkey/autocal_enable
+    chown radio system /sys/devices/virtual/misc/melfas_touchkey/autocal_stat
+    chown radio system /sys/devices/virtual/misc/melfas_touchkey/touchkey_idac0
+    chown radio system /sys/devices/virtual/misc/melfas_touchkey/touchkey_idac1
+    chown radio system /sys/devices/virtual/misc/melfas_touchkey/touchkey_idac2
+    chown radio system /sys/devices/virtual/misc/melfas_touchkey/touchkey_idac3
+    chown radio system /sys/devices/virtual/sec/sec_touchkey/touchkey_firm_version_panel
+    chown radio system /sys/devices/virtual/sec/sec_touchkey/touchkey_firm_version_phone
+    chown radio system /sys/devices/virtual/sec/sec_touchkey/touchkey_firm_update_status
+    chown radio system /sys/devices/virtual/sec/sec_touchkey/touchkey_firm_update
+    chown radio system /sys/devices/virtual/sec/qt602240_noise_test/set_firm_version
+    chown radio system /sys/devices/virtual/sec/qt602240_noise_test/set_threshould
+    chown radio system /sys/devices/virtual/sec/qt602240_noise_test/set_all_refer
+    chown radio system /sys/devices/virtual/sec/qt602240_noise_test/set_delta4
+    chown radio system /sys/devices/virtual/sec/qt602240_noise_test/set_refer4
+    chown radio system /sys/devices/virtual/sec/qt602240_noise_test/set_delta3
+    chown radio system /sys/devices/virtual/sec/qt602240_noise_test/set_refer3
+    chown radio system /sys/devices/virtual/sec/qt602240_noise_test/set_delta2
+    chown radio system /sys/devices/virtual/sec/qt602240_noise_test/set_refer2
+    chown radio system /sys/devices/virtual/sec/qt602240_noise_test/set_delta1
+    chown radio system /sys/devices/virtual/sec/qt602240_noise_test/set_refer1
+    chown radio system /sys/devices/virtual/sec/qt602240_noise_test/set_delta0
+    chown radio system /sys/devices/virtual/sec/qt602240_noise_test/set_refer0
+    chown radio system /sys/devices/virtual/sec/sec_touchscreen/tsp_firm_version_panel
+    chown radio system /sys/devices/virtual/sec/sec_touchscreen/tsp_firm_version_phone
+    chown radio system /sys/devices/virtual/sec/sec_touchscreen/tsp_firm_update_status 
+    chown radio system /sys/devices/virtual/sec/sec_touchscreen/tsp_firm_update 
+    chown radio system /sys/devices/platform/s5p-ehci/ehci_runtime
+    chown radio system /sys/devices/platform/modemctl/wakeup
+    chown radio system /sys/devices/platform/modemctl/control
+    chown radio system /sys/devices/platform/android_usb/tethering
+    chown radio system /sys/devices/platform/android_usb/UsbMenuSel
+    chown radio system /sys/devices/virtual/sec/switch/disable_vbus
+    chown radio system /sys/devices/virtual/gpio/gpio225/value
+    chown radio system /sys/devices/platform/i2c-gpio.9/i2c-9/9-0036/power_supply/fuelgauge/fg_read_soc
+    chown radio system /sys/devices/platform/i2c-gpio.9/i2c-9/9-0036/power_supply/fuelgauge/fg_reset_soc
+    chown radio system /sys/devices/platform/s3c2410-i2c.5/i2c-5/5-0066/max8997-muic/usb_sel
+    chown radio system /sys/devices/platform/s3c2410-i2c.5/i2c-5/5-0066/max8997-muic/esn
+    chown radio system /sys/devices/platform/sec-battery/power_supply/battery/batt_lpm_state
+    chown radio system /sys/devices/platform/sec-battery/power_supply/battery/fg_psoc
+    chown radio system /sys/devices/platform/sec-battery/power_supply/battery/system_rev
+    chown radio system /sys/devices/platform/sec-battery/power_supply/battery/batt_current_adc
+    chown radio system /sys/devices/platform/sec-battery/power_supply/battery/batt_test_value
+    chown radio system /sys/devices/platform/sec-battery/power_supply/battery/batt_temp_adc_spec
+    chown radio system /sys/devices/platform/sec-battery/power_supply/battery/batt_temp_check
+    chown radio system /sys/devices/platform/sec-battery/power_supply/battery/batt_full_check
+    chown radio system /sys/devices/platform/sec-battery/power_supply/battery/batt_type
+    chown radio system /sys/devices/platform/sec-battery/power_supply/battery/mp3
+    chown radio system /sys/devices/platform/sec-battery/power_supply/battery/video
+    chown radio system /sys/devices/platform/sec-battery/power_supply/battery/batt_lp_charging
+    chown radio system /sys/devices/platform/sec-battery/power_supply/battery/charging_source
+    chown radio system /sys/devices/platform/sec-battery/power_supply/battery/batt_temp_adc_avg
+    chown radio system /sys/devices/platform/sec-battery/power_supply/battery/batt_temp_adc
+    chown radio system /sys/devices/platform/sec-battery/power_supply/battery/batt_temp
+    chown radio system /sys/devices/platform/sec-battery/power_supply/battery/batt_vfocv
+    chown radio system /sys/devices/platform/sec-battery/power_supply/battery/batt_soc
+    chown radio system /sys/devices/platform/sec-battery/power_supply/battery/batt_vol
+    chown radio radio /sys/devices/platform/sec-battery/power_supply/battery/talk_gsm
+    chown radio radio /sys/devices/platform/sec-battery/power_supply/battery/video
+    chown radio radio /sys/devices/platform/sec-battery/power_supply/battery/music
+    chown radio radio /sys/devices/platform/sec-battery/power_supply/battery/browser
+    chown radio radio /sys/devices/platform/sec-battery/power_supply/battery/hotspot
+    chown radio radio /sys/devices/platform/sec-battery/power_supply/battery/camera
+    chown radio radio /sys/devices/platform/sec-battery/power_supply/battery/data_call
+    chown radio radio /sys/devices/platform/sec-battery/power_supply/battery/wimax
+    chown radio radio  /sys/devices/virtual/mdnieset_outdoor/switch_mdnieset_outdoor/mdnieset_outdoor_file_cmd 
+    chown radio radio /sys/devices/virtual/mdnieset_ui/switch_mdnieset_ui/mdnieset_init_file_cmd 
+    chown radio radio /sys/devices/virtual/mdnieset_ui/switch_mdnieset_ui/mdnieset_user_select_file_cmd
+    chown radio radio /sys/devices/virtual/mdnieset_ui/switch_mdnieset_ui/mdnieset_ui_file_cmd 
+    chown radio system /sys/devices/platform/s5p-ehci/ehci_power
+    chown radio system /sys/devices/virtual/net/svnet0/waketime
 
 
 #### End of Add permission for ATM. 2010.03.20 #######################
@@ -578,7 +578,7 @@ on boot
     chmod 0660 /sys/power/state
     chmod 0660 /sys/power/wake_lock
     chmod 0660 /sys/power/wake_unlock
-    chmod 0660 /sys/power/dvfslock_ctrl    		
+    chmod 0660 /sys/power/dvfslock_ctrl
     chown system system /sys/class/timed_output/vibrator/enable
     chown system system /sys/class/leds/keyboard-backlight/brightness
 #    chown system system /sys/class/leds/lcd-backlight/brightness
@@ -652,20 +652,20 @@ on boot
     chmod 0777 /data/update_success
 
 # CIQ
-	chown system system /dev/ttyCIQ0
-	chown system system /dev/ttyTRFB0
+    chown system system /dev/ttyCIQ0
+    chown system system /dev/ttyTRFB0
 
 # Audio Tunning Files
-	chmod 0777 /system/etc/audio/stream_speaker.txt
-	chmod 0777 /system/etc/audio/stream_headset.txt
-	chmod 0777 /system/etc/audio/stream_earpiece.txt
-	chmod 0777 /system/etc/audio/situation.txt
-	chmod 0777 /system/etc/audio/aeqcoe.txt
-	chmod 0777 /system/etc/audio/soundbooster.txt
-	chmod 0777 /system/etc/audio/srstunning.txt
-	chmod 0777 /system/etc/audio/ArkamysTuning.txt
+    chmod 0777 /system/etc/audio/stream_speaker.txt
+    chmod 0777 /system/etc/audio/stream_headset.txt
+    chmod 0777 /system/etc/audio/stream_earpiece.txt
+    chmod 0777 /system/etc/audio/situation.txt
+    chmod 0777 /system/etc/audio/aeqcoe.txt
+    chmod 0777 /system/etc/audio/soundbooster.txt
+    chmod 0777 /system/etc/audio/srstunning.txt
+    chmod 0777 /system/etc/audio/ArkamysTuning.txt
 
-#	echo "1" > /sys/devices/platform/samsung-pd.2/s3cfb.0/mdnie
+#    echo "1" > /sys/devices/platform/samsung-pd.2/s3cfb.0/mdnie
 
     class_start default
 
@@ -691,58 +691,58 @@ on property:ro.secure=0
 # Samsung USB Mode : system properties are linked with sysfs
 # write /sys/class/sec/switch/UsbMenuSel 0
 on property:persist.service.usb.setting=0
-	write /sys/devices/platform/android_usb/UsbMenuSel 0
+    write /sys/devices/platform/android_usb/UsbMenuSel 0
 on property:persist.service.usb.setting=1
-	write /sys/devices/platform/android_usb/UsbMenuSel 1
+    write /sys/devices/platform/android_usb/UsbMenuSel 1
 on property:persist.service.usb.setting=2
-	write /sys/devices/platform/android_usb/UsbMenuSel 2
+    write /sys/devices/platform/android_usb/UsbMenuSel 2
 on property:persist.service.usb.setting=3
-	write /sys/devices/platform/android_usb/UsbMenuSel 3
+    write /sys/devices/platform/android_usb/UsbMenuSel 3
 on property:persist.service.usb.setting=4
-	write /sys/devices/platform/android_usb/UsbMenuSel 4
+    write /sys/devices/platform/android_usb/UsbMenuSel 4
 
 # USB HUB : system properties are linked with sysfs
 #  bit :    3     2      1         0
 #          AP,   CP, WIMAX, RESERVED
 # Enable AP, CP, WIMAX
 on property:persist.service.usb.hubport=0
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_wimax
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_cp
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_ap
-	write /sys/class/sec/switch/set_usb_path ALL
+    write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_wimax
+    write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_cp
+    write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_ap
+    write /sys/class/sec/switch/set_usb_path ALL
 on property:persist.service.usb.hubport=2
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_wimax
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_cp
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_ap
-	write /sys/class/sec/switch/set_usb_path ALL
+    write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_wimax
+    write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_cp
+    write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_ap
+    write /sys/class/sec/switch/set_usb_path ALL
 on property:persist.service.usb.hubport=4
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_wimax
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_cp
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_ap
-	write /sys/class/sec/switch/set_usb_path AP
+    write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_wimax
+    write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_cp
+    write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_ap
+    write /sys/class/sec/switch/set_usb_path AP
 on property:persist.service.usb.hubport=6
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_wimax
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_cp
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_ap
-	write /sys/class/sec/switch/set_usb_path AP
+    write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_wimax
+    write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_cp
+    write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_ap
+    write /sys/class/sec/switch/set_usb_path AP
 on property:persist.service.usb.hubport=8
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_wimax
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_cp
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_ap
-	write /sys/class/sec/switch/set_usb_path CP
+    write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_wimax
+    write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_cp
+    write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_ap
+    write /sys/class/sec/switch/set_usb_path CP
 on property:persist.service.usb.hubport=10
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_wimax
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enalbe_cp
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_ap
-	write /sys/class/sec/switch/set_usb_path CP
+    write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_wimax
+    write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enalbe_cp
+    write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_ap
+    write /sys/class/sec/switch/set_usb_path CP
 on property:persist.service.usb.hubport=12
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_wimax
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_cp
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_ap
+    write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_wimax
+    write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_cp
+    write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_ap
 on property:persist.service.usb.hubport=14
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_wimax
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_cp
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_ap
+    write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_wimax
+    write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_cp
+    write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_ap
 
 # adbd is controlled by the persist.service.adb.enable system property
 service adbd /sbin/adbd
@@ -867,7 +867,7 @@ service mfgloader /system/bin/mfgloader
     oneshot
 
 service wlandutservice /system/bin/wlandutservice
-	user system
+    user system
     group wifi net_raw net_admin system inet
     disabled
     oneshot
