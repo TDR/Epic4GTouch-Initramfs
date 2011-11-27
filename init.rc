@@ -831,17 +831,16 @@ service playsound /system/bin/playsound
     disabled
     oneshot
 
-# Init.d
-service sysinit /system/bin/logwrapper /sbin/busybox run-parts /system/etc/init.d
+# Run init.d scripts
+service sysinit /system/bin/logwrapper /sbin/run-parts /system/etc/init.d
     user root
-    critical
+    group shell
     oneshot
 
 # Custom bootanimation
 service bootanim /system/bin/bootanimation
     user graphics
     group graphics
-    critical
     oneshot
 
 service wpa_supplicant /system/bin/wpa_supplicant -Dwext -ieth0 -c/data/wifi/bcm_supp.conf
