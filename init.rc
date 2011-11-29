@@ -165,7 +165,7 @@ on post-fs
     mkdir /data
     
     exec check_filesystem /dev/block/mmcblk0p10 ext4    
-    mount ext4 /dev/block/mmcblk0p10 /data wait nosuid nodev noatime nodiratime noauto_da_alloc crypt discard
+    mount ext4 /dev/block/mmcblk0p10 /data wait nosuid nodev noatime nodiratime noauto_da_alloc crypt discard,journal_checksum
     
     chown system system /data
     chmod 0771 /data
@@ -263,7 +263,7 @@ on post-fs
     mkdir /data/misc/systemkeys 0700 system system
     mkdir /data/misc/vpn/profiles 0770 system system
     # give system access to wpa_supplicant.conf for backup and restore
-    mkdir /data/misc/wifi 0770 wifi wifi
+    mkdir /data/misc/wifi 0770 wifi system
     chmod 0770 /data/misc/wifi
     mkdir /data/misc/radio 0774 radio radio
     mkdir /data/misc/wifi/sockets 0770 wifi wifi
@@ -633,7 +633,7 @@ on boot
 # Define TCP buffer s  mkdir /data/misc/dhcp 0777 dhcp dhcpizes for various networks
 #   ReadMin, ReadInitial, ReadMax, WriteMin, WriteInitial, WriteMax,
     setprop net.tcp.buffersize.default 4096,87380,110208,4096,16384,110208
-    setprop net.tcp.buffersize.wifi    4095,87380,110208,4096,16384,110208
+    setprop net.tcp.buffersize.wifi    4095,131072,196608,4096,16384,110208
     setprop net.tcp.buffersize.umts    4094,87380,110208,4096,16384,110208
     setprop net.tcp.buffersize.edge    4093,26280,35040,4096,16384,35040
     setprop net.tcp.buffersize.gprs    4092,8760,11680,4096,8760,11680
@@ -844,10 +844,16 @@ service bootanim /system/bin/bootanimation
     oneshot
 
 service wpa_supplicant /system/bin/wpa_supplicant -Dwext -ieth0 -c/data/wifi/bcm_supp.conf
+    class main
+    socket wpa_eth0 dgram 0660 wifi wifi
     disabled
     oneshot
 
 service dhcpcd /system/bin/dhcpcd
+    disabled
+    oneshot
+
+service iprenew_eth0 /system/bin/dhcpcd -n
     disabled
     oneshot
 
@@ -958,12 +964,15 @@ service rtc_log /system/bin/sh /system/bin/rtc_log.sh
      group shell
 
 on property:encryption.bootmode=remount
+    exec check_encrypted_filesystem /data ext4
+
+    stop gps-daemon
+    stop mobex-daemon
+    stop DR-daemon
     stop tvout
     stop media
     stop immvibed
     stop zygote
-    
-    #exec apply_system_policy /dev/block/mmcblk0p10
 
     mount ext4 /dev/block/mmcblk0p10 /data wait nosuid nodev noatime nodiratime noauto_da_alloc usedm discard
     chown system system /data
@@ -1001,6 +1010,11 @@ on property:encryption.bootmode=remount
 
     write /proc/apanic_console 1
     
+
+# create data/gps for GPS demon
+    mkdir /data/gps 771 gps system
+    chown gps system /data/gps
+
     # create basic filesystem structure
     mkdir /data/misc 01771 system misc
     mkdir /data/misc/bluetoothd 0770 bluetooth bluetooth
@@ -1010,7 +1024,7 @@ on property:encryption.bootmode=remount
     mkdir /data/misc/systemkeys 0700 system system
     mkdir /data/misc/vpn/profiles 0770 system system
     # give system access to wpa_supplicant.conf for backup and restore
-    mkdir /data/misc/wifi 0770 wifi wifi
+    mkdir /data/misc/wifi 0770 wifi system
     chmod 0770 /data/misc/wifi
     mkdir /data/misc/radio 0774 radio radio
     mkdir /data/misc/wifi/sockets 0770 wifi wifi
@@ -1025,6 +1039,11 @@ on property:encryption.bootmode=remount
     mkdir /data/app-private 0771 system system
     mkdir /data/app 0771 system system
     mkdir /data/property 0700 root root
+
+   # for TRP/TIS
+    write /data/.psm.info 1
+    chown system system /data/.psm.info
+    chmod 0600 /data/.psm.info
 
     #over-wirte-permission.
     chmod 0771 /data/app
@@ -1058,6 +1077,27 @@ on property:encryption.bootmode=remount
     chown root root /cache/lost+found
     chmod 0770 /cache/lost+found
 
+#SISO-PLAYREADY-CHANGES
+#DRM directory creation
+
+    #mkdir /data/mrd/almc/adabip/ 0744
+    mkdir /data/mrd 0744
+    mkdir /data/mrd/almc 0744
+    mkdir /data/mrd/almc/adabip 0744
+    chown radio radio /data/mrd/almc/adabip/
+    chmod 0744 /data/mrd/almc/adabip/
+
+
+    # Added for Playready DRM Support
+#mkdir /data/data/.drm 0755
+    mkdir /data/data/.drm 0775
+    chown media system /data/data/.drm
+    chmod 0775 /data/data/.drm
+    mkdir /data/data/.drm/.playready 0775
+    chown media system /data/data/.drm/.playready
+    chmod 0775 /data/data/.drm/.playready
+#SISO-PLAYREADY-CHANGES
+
     mkdir /data/core
     write /proc/sys/kernel/core_pattern /data/core/core_%e_%p
 
@@ -1068,7 +1108,10 @@ on property:encryption.bootmode=remount
     start immvibed
     start media
     start tvout 
-
+    start DR-daemon
+    start mobex-daemon
+    start gps-daemon
+    
 # Anirudh For WiMAX DHCP
 service dhcpcd_wimax /system/bin/dhcpcd uwbr0 -ABK
     disabled
