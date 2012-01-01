@@ -139,7 +139,7 @@ on fs
     mount ext4 /dev/block/mmcblk0p9 /system wait ro noatime nodiratime
     # mount rfs /dev/block/stl10 /data nosuid nodev check=no
     # mount rfs /dev/block/mmcblk0p7 /cache nosuid nodev check=no
-    mount ext4 /dev/block/mmcblk0p7 /cache wait nosuid nodev noatime nodiratime noauto_da_alloc
+    mount ext4 /dev/block/mmcblk0p7 /cache wait nosuid nodev noatime nodiratime,noauto_da_alloc
 
     # SEC_DMCRYPT move mounting efs befor apply_disk_policy, and set group id to system
     mkdir /efs
@@ -165,7 +165,7 @@ on post-fs
     mkdir /data
 
     exec check_filesystem /dev/block/mmcblk0p10 ext4
-    mount ext4 /dev/block/mmcblk0p10 /data wait nosuid nodev noatime nodiratime noauto_da_alloc crypt discard,journal_checksum
+    mount ext4 /dev/block/mmcblk0p10 /data wait nosuid nodev noatime nodiratime crypt discard,noauto_da_alloc,journal_checksum
 
     chown system system /data
     chmod 0771 /data
@@ -974,7 +974,7 @@ on property:encryption.bootmode=remount
     stop immvibed
     stop zygote
 
-    mount ext4 /dev/block/mmcblk0p10 /data wait nosuid nodev noatime nodiratime noauto_da_alloc usedm discard
+    mount ext4 /dev/block/mmcblk0p10 /data wait nosuid nodev noatime nodiratime usedm discard,noauto_da_alloc
     chown system system /data
     chmod 0771 /data
     mkdir /data/dbdata
