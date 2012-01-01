@@ -651,10 +651,6 @@ on boot
 # CI FUMO check routine
     chmod 0777 /data/update_success
 
-# CIQ
-#   chown system system /dev/ttyCIQ0
-#   chown system system /dev/ttyTRFB0
-
 # Audio Tunning Files
     chmod 0777 /system/etc/audio/stream_speaker.txt
     chmod 0777 /system/etc/audio/stream_headset.txt
@@ -934,14 +930,6 @@ service mtpd /system/bin/mtpd
     disabled
     oneshot
 
-service iqmsd /system/bin/iqmsd
-    disabled
-
-on property:service.iq.active=1
-    start iqmsd
-
-on property:service.iq.active=0
-    stop iqmsd
 service keystore /system/bin/keystore /data/misc/keystore
     user keystore
     group keystore
