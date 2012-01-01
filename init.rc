@@ -14,11 +14,11 @@ loglevel 3
     export ANDROID_ROOT /system
     export ANDROID_ASSETS /system/app
     export ANDROID_DATA /data
-    
+
     export EXTERNAL_STORAGE /mnt/sdcard
     export EXTERNAL_STORAGE2 /mnt/sdcard/external_sd
     export USBHOST_STORAGE /mnt/sdcard/usbStorage
-    
+
     export ASEC_MOUNTPOINT /mnt/asec
     export LOOP_MOUNTPOINT /mnt/obb
     export BOOTCLASSPATH /system/framework/core.jar:/system/framework/bouncycastle.jar:/system/framework/ext.jar:/system/framework/framework.jar:/system/framework/android.policy.jar:/system/framework/services.jar:/system/framework/core-junit.jar
@@ -44,7 +44,7 @@ loglevel 3
     mount cgroup none /acct cpuacct
     mkdir /acct/uid
 
-#add booting sound property 
+#add booting sound property
     setprop audioflinger.bootsnd 1
 
 #add camera sound property for NA_SPR
@@ -80,7 +80,7 @@ loglevel 3
     # usb public mount points.
     mkdir /mnt/usb 0700 root system
     mount tmpfs tmpfs /mnt/usb mode=0755,gid=1000
-    
+
     #  Browser app memory cache.
     mkdir /app-cache 0770 system inet
     mount tmpfs tmpfs /app-cache size=7M
@@ -126,7 +126,7 @@ loglevel 3
 
 # ko files for wimax
     insmod /lib/modules/cmc7xx_sdio.ko
-    
+
 on fs
     # mount mtd partitions
     # Mount /system rw first to give the filesystem a chance to save a checkpoint
@@ -150,23 +150,23 @@ on fs
 
     # SEC_DMCRYPT efs or cache or lfs partition required
     exec apply_sec_devenc_init
-    
+
     mount debugfs nil /sys/kernel/debug
 
 on post-fs
     # verfiy filesystem (UMS)
     exec apply_system_policy /dev/block/mmcblk0p11 vfat
-    
+
     # once everything is setup, no need to modify /
     # mount rootfs rootfs / ro remount
 
     # We chown/chmod /data again so because mount is run as root + defaults
     # use movinand second partition as /data.
     mkdir /data
-    
-    exec check_filesystem /dev/block/mmcblk0p10 ext4    
+
+    exec check_filesystem /dev/block/mmcblk0p10 ext4
     mount ext4 /dev/block/mmcblk0p10 /data wait nosuid nodev noatime nodiratime noauto_da_alloc crypt discard,journal_checksum
-    
+
     chown system system /data
     chmod 0771 /data
     mkdir /data/system
@@ -193,7 +193,7 @@ on post-fs
     # SEC_DMCRYPT move mounting efs befor apply_disk_policy
     #mkdir /efs
     #mount rfs /dev/block/mmcblk0p1 /efs nosuid nodev check=no
-    #mount ext4 /dev/block/mmcblk0p1 /efs nosuid nodev noatime wait 
+    #mount ext4 /dev/block/mmcblk0p1 /efs nosuid nodev noatime wait
     #chown radio radio /efs
     #chmod 0771 /efs
 
@@ -210,7 +210,7 @@ on post-fs
     # Create dump dir and collect dumps.
     # Do this before we mount cache so eventually we can use cache for
     # storing dumps on platforms which do not have a dedicated dump partition.
-   
+
     mkdir /data/dontpanic
     chown root log /data/dontpanic
     chmod 0750 /data/dontpanic
@@ -233,7 +233,7 @@ on post-fs
     # Browser. Same reason as /data above
     chown system inet /app-cache
     chmod 0770 /app-cache
-    
+
     # This may have been created by the recovery system with odd permissions
     chown system cache /cache/recovery
     chmod 0775 /cache/recovery
@@ -249,7 +249,7 @@ on post-fs
     chmod 0220 /proc/sysrq-trigger
 
 # UART switch
-# Request of manufacturing application!!! 
+# Request of manufacturing application!!!
     chown radio system /sys/class/sec/uart_switch/UART_SEL/value
     chmod 0664 /sys/class/sec/uart_switch/UART_SEL/value
 
@@ -289,14 +289,14 @@ on post-fs
 
     #over-wirte-permission.
     chmod 0771 /data/app
-    chown system system /data/app    
+    chown system system /data/app
 
     # create log system
     mkdir /data/log 0777 system system
 
     chmod 0777 /data/log
     chmod 0777 /data/anr
-    
+
     chmod 0662 /dev/log/radio
     chmod 0662 /dev/log/main
     chmod 0662 /dev/log/event
@@ -468,24 +468,24 @@ on boot
 
 
     chown radio system /sys/devices/virtual/K3G_GYRO-dev/k3g/gyro_selftest
-    chown radio system /sys/devices/virtual/K3G_GYRO-dev/k3g/gyro_get_temp 
-    chown radio system /sys/devices/virtual/K3G_GYRO-dev/k3g/gyro_power_on 
+    chown radio system /sys/devices/virtual/K3G_GYRO-dev/k3g/gyro_get_temp
+    chown radio system /sys/devices/virtual/K3G_GYRO-dev/k3g/gyro_power_on
     chown radio system /sys/devices/virtual/K3G_GYRO-dev/k3g/gyro_selftest_dps
-    chown radio system /sys/devices/virtual/accelerometer/accelerometer/acc_file 
+    chown radio system /sys/devices/virtual/accelerometer/accelerometer/acc_file
     chown radio system /sys/devices/virtual/misc/melfas_touchkey/touch_sensitivity
     chown radio system /sys/devices/virtual/sec/gsensorcal/calibration
-    chown radio system /sys/devices/virtual/jack/jack_selector/select_jack 
-    chown radio system /sys/devices/platform/samsung-pd.2/s3cfb.0/spi_gpio.3/spi3.0/lcd_power 
-    chown radio system /sys/devices/platform/samsung-pd.2/s3cfb.0/spi_gpio.3/spi3.0/octa_lcdtype 
-    chown radio system /sys/devices/platform/samsung-pd.2/s3cfb.0/spi_gpio.3/spi3.0/lcdtype 
-    chown radio radio /sys/devices/platform/samsung-pd.2/s3cfb.0/spi_gpio.3/spi3.0/acl_set 
-    chown radio radio /sys/devices/platform/samsung-pd.2/s3cfb.0/spi_gpio.3/spi3.0/gamma_table 
-    chown radio radio /sys/devices/platform/samsung-pd.2/s3cfb.0/spi_gpio.3/spi3.0/gamma_mode 
+    chown radio system /sys/devices/virtual/jack/jack_selector/select_jack
+    chown radio system /sys/devices/platform/samsung-pd.2/s3cfb.0/spi_gpio.3/spi3.0/lcd_power
+    chown radio system /sys/devices/platform/samsung-pd.2/s3cfb.0/spi_gpio.3/spi3.0/octa_lcdtype
+    chown radio system /sys/devices/platform/samsung-pd.2/s3cfb.0/spi_gpio.3/spi3.0/lcdtype
+    chown radio radio /sys/devices/platform/samsung-pd.2/s3cfb.0/spi_gpio.3/spi3.0/acl_set
+    chown radio radio /sys/devices/platform/samsung-pd.2/s3cfb.0/spi_gpio.3/spi3.0/gamma_table
+    chown radio radio /sys/devices/platform/samsung-pd.2/s3cfb.0/spi_gpio.3/spi3.0/gamma_mode
     chown radio system /sys/devices/virtual/mdnieset_outdoor/switch_mdnieset_outdoor/mdnieset_outdoor_file_cmd
     chown radio system /sys/devices/virtual/mdnieset_ui/switch_mdnieset_ui/mdnieset_init_file_cmd
     chown radio system /sys/devices/virtual/mdnieset_ui/switch_mdnieset_ui/mdnieset_user_select_file_cmd
     chown radio system /sys/devices/virtual/mdnieset_ui/switch_mdnieset_ui/mdnieset_ui_file_cmd
-    chown radio system /sys/devices/virtual/misc/melfas_touchkey/enable_disable 
+    chown radio system /sys/devices/virtual/misc/melfas_touchkey/enable_disable
     chown radio system /sys/devices/virtual/misc/melfas_touchkey/brightness
     chown radio system /sys/devices/virtual/misc/melfas_touchkey/touch_update
     chown radio system /sys/devices/virtual/misc/melfas_touchkey/touch_version
@@ -514,8 +514,8 @@ on boot
     chown radio system /sys/devices/virtual/sec/qt602240_noise_test/set_refer0
     chown radio system /sys/devices/virtual/sec/sec_touchscreen/tsp_firm_version_panel
     chown radio system /sys/devices/virtual/sec/sec_touchscreen/tsp_firm_version_phone
-    chown radio system /sys/devices/virtual/sec/sec_touchscreen/tsp_firm_update_status 
-    chown radio system /sys/devices/virtual/sec/sec_touchscreen/tsp_firm_update 
+    chown radio system /sys/devices/virtual/sec/sec_touchscreen/tsp_firm_update_status
+    chown radio system /sys/devices/virtual/sec/sec_touchscreen/tsp_firm_update
     chown radio system /sys/devices/platform/s5p-ehci/ehci_runtime
     chown radio system /sys/devices/platform/modemctl/wakeup
     chown radio system /sys/devices/platform/modemctl/control
@@ -554,17 +554,17 @@ on boot
     chown radio radio /sys/devices/platform/sec-battery/power_supply/battery/camera
     chown radio radio /sys/devices/platform/sec-battery/power_supply/battery/data_call
     chown radio radio /sys/devices/platform/sec-battery/power_supply/battery/wimax
-    chown radio radio  /sys/devices/virtual/mdnieset_outdoor/switch_mdnieset_outdoor/mdnieset_outdoor_file_cmd 
-    chown radio radio /sys/devices/virtual/mdnieset_ui/switch_mdnieset_ui/mdnieset_init_file_cmd 
+    chown radio radio  /sys/devices/virtual/mdnieset_outdoor/switch_mdnieset_outdoor/mdnieset_outdoor_file_cmd
+    chown radio radio /sys/devices/virtual/mdnieset_ui/switch_mdnieset_ui/mdnieset_init_file_cmd
     chown radio radio /sys/devices/virtual/mdnieset_ui/switch_mdnieset_ui/mdnieset_user_select_file_cmd
-    chown radio radio /sys/devices/virtual/mdnieset_ui/switch_mdnieset_ui/mdnieset_ui_file_cmd 
+    chown radio radio /sys/devices/virtual/mdnieset_ui/switch_mdnieset_ui/mdnieset_ui_file_cmd
     chown radio system /sys/devices/platform/s5p-ehci/ehci_power
     chown radio system /sys/devices/virtual/net/svnet0/waketime
 
 
 #### End of Add permission for ATM. 2010.03.20 #######################
 
-   
+
     # Permissions for System Server and daemons.
     chown radio system /sys/android_power/state
     chown radio system /sys/android_power/request_state
@@ -574,7 +574,7 @@ on boot
     chown radio system /sys/power/state
     chown radio system /sys/power/wake_lock
     chown radio system /sys/power/wake_unlock
-    chown radio system /sys/power/dvfslock_ctrl     
+    chown radio system /sys/power/dvfslock_ctrl
     chmod 0660 /sys/power/state
     chmod 0660 /sys/power/wake_lock
     chmod 0660 /sys/power/wake_unlock
@@ -585,7 +585,7 @@ on boot
     chown system system /sys/class/backlight/pwm-backlight/brightness
 #    chown system system /sys/class/leds/button-backlight/brightness
     chown system system /sys/devices/virtual/misc/melfas_touchkey/brightness
-    chown system system /sys/devices/virtual/proximity/proximity/proximity_avg 
+    chown system system /sys/devices/virtual/proximity/proximity/proximity_avg
     chown system system /sys/class/leds/jogball-backlight/brightness
     chown system system /sys/class/leds/red/brightness
     chown system system /sys/class/leds/green/brightness
@@ -632,7 +632,7 @@ on boot
     chown bluetooth bluetooth /sys/class/rfkill/rfkill1/state
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
     chown bluetooth bluetooth /sys/class/rfkill/rfkill1/type
-    
+
 # Define TCP buffer s  mkdir /data/misc/dhcp 0777 dhcp dhcpizes for various networks
 #   ReadMin, ReadInitial, ReadMax, WriteMin, WriteInitial, WriteMax,
     setprop net.tcp.buffersize.default 4096,87380,110208,4096,16384,110208
@@ -646,14 +646,14 @@ on boot
 # for datarouter
     chown system system /dev/ttyGS0
     chown system system /dev/dun
-# +++++++++++++++++++++++++++++++++++++++++++      
+# +++++++++++++++++++++++++++++++++++++++++++
 
 # CI FUMO check routine
     chmod 0777 /data/update_success
 
 # CIQ
-    chown system system /dev/ttyCIQ0
-    chown system system /dev/ttyTRFB0
+#   chown system system /dev/ttyCIQ0
+#   chown system system /dev/ttyTRFB0
 
 # Audio Tunning Files
     chmod 0777 /system/etc/audio/stream_speaker.txt
@@ -798,11 +798,11 @@ service gps-daemon /system/bin/gpsd
 
 service mobex-daemon /system/bin/npsmobex
     user system
-    group system inet     
+    group system inet
 
 service DR-daemon /system/bin/drexe
     user root
-    group system radio inet net_raw     
+    group system radio inet net_raw
 
 service pppd_cdma /system/bin/pppd_runner
    user root
@@ -997,7 +997,7 @@ on property:encryption.bootmode=remount
     # Create dump dir and collect dumps.
     # Do this before we mount cache so eventually we can use cache for
     # storing dumps on platforms which do not have a dedicated dump partition.
-   
+
     mkdir /data/dontpanic
     chown root log /data/dontpanic
     chmod 0750 /data/dontpanic
@@ -1012,7 +1012,7 @@ on property:encryption.bootmode=remount
     chmod 0640 /data/dontpanic/apanic_threads
 
     write /proc/apanic_console 1
-    
+
 
 # create data/gps for GPS demon
     mkdir /data/gps 771 gps system
@@ -1050,14 +1050,14 @@ on property:encryption.bootmode=remount
 
     #over-wirte-permission.
     chmod 0771 /data/app
-    chown system system /data/app    
+    chown system system /data/app
 
     # create log system
     mkdir /data/log 0777 system system
 
     chmod 0777 /data/log
     chmod 0777 /data/anr
-    
+
     chmod 0662 /dev/log/radio
     chmod 0662 /dev/log/main
     chmod 0662 /dev/log/event
@@ -1104,17 +1104,17 @@ on property:encryption.bootmode=remount
     mkdir /data/core
     write /proc/sys/kernel/core_pattern /data/core/core_%e_%p
 
-# k.moon.kim_2011.7.10 'reload properties for ODE 
+# k.moon.kim_2011.7.10 'reload properties for ODE
     exec reload_data_partition_properties
-    
+
     start zygote
     start immvibed
     start media
-    start tvout 
+    start tvout
     start DR-daemon
     start mobex-daemon
     start gps-daemon
-    
+
 # Anirudh For WiMAX DHCP
 service dhcpcd_wimax /system/bin/dhcpcd uwbr0 -ABK
     disabled
