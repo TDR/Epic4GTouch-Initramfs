@@ -139,7 +139,7 @@ on fs
     mount ext4 /dev/block/mmcblk0p9 /system wait ro noatime nodiratime
     # mount rfs /dev/block/stl10 /data nosuid nodev check=no
     # mount rfs /dev/block/mmcblk0p7 /cache nosuid nodev check=no
-    mount ext4 /dev/block/mmcblk0p7 /cache wait nosuid nodev noatime nodiratime,noauto_da_alloc
+    mount ext4 /dev/block/mmcblk0p7 /cache wait nosuid nodev noatime nodiratime noauto_da_alloc
 
     # SEC_DMCRYPT move mounting efs befor apply_disk_policy, and set group id to system
     mkdir /efs
